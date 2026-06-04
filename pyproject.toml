@@ -1,0 +1,20 @@
+[project]
+name = "xplora-soc-eval"
+version = "0.1.0"
+description = "Evaluate pyxplora-api for battery SoC supervision across Xplora watches"
+readme = "README.md"
+authors = [
+    { name = "Erik Osvaldsson", email = "erik@osvaldsson.se" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "python-dotenv>=1.2.2",
+    "pyxplora-api>=2.12.9",
+]
+
+[project.scripts]
+xplora-soc-eval = "xplora_soc_eval:main"
+
+[build-system]
+requires = ["uv_build>=0.11.16,<0.12.0"]
+build-backend = "uv_build"
