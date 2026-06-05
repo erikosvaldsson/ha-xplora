@@ -14,6 +14,8 @@ dependencies = [
 
 [project.scripts]
 xplora-soc-eval = "xplora_soc_eval:main"
+xplora-probe = "xplora_soc_eval.probe:main"
+xplora-diag = "xplora_soc_eval.diag:main"
 
 [build-system]
 requires = ["uv_build>=0.11.16,<0.12.0"]

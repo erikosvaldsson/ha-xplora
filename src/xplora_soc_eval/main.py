@@ -71,7 +71,7 @@ def _load_credentials() -> dict[str, str]:
     return creds
 
 
-async def _build_client(creds: dict[str, str]) -> PyXploraApi:
+async def _build_client(creds: dict[str, str], session=None) -> PyXploraApi:
     client = PyXploraApi(
         countrycode=creds["countrycode"],
         phoneNumber=creds["phoneNumber"],
@@ -79,28 +79,45 @@ async def _build_client(creds: dict[str, str]) -> PyXploraApi:
         userLang=creds["userLang"],
         timeZone=creds["timeZone"],
         email=creds["email"] or None,
+        session=session,
     )
+    # Cap login hammering: default maxRetries=3 means 5 login attempts, and on a
+    # genuine auth failure retrying never helps — it just burns login attempts
+    # (loginFailCount) and risks a lockout. See INVESTIGATION.md WS3.
+    client.maxRetries = 0  # -> 2 attempts
+    client.retryDelay = 1
     await client.init(forceLogin=True)
     return client
 
 
+async def _online_passive(client: PyXploraApi, wuid: str) -> str:
+    """Online status from the passive `watches` query — no active locate."""
+    try:
+        data = await client._gql_handler.getWatches_a(wuid)
+        watches = data.get("watches", [])
+        if watches:
+            return str(watches[0].get("onlineStatus", "UNKNOWN"))
+    except Exception:  # noqa: BLE001
+        pass
+    return "UNKNOWN"
+
+
 async def _read_all(client: PyXploraApi) -> list[WatchReading]:
+    # Passive only: read the last *reported* battery (with_ask=False) and the
+    # onlineStatus field. We never send askWatchLocate — see INVESTIGATION.md.
     wuids = client.getWatchUserIDs()  # sync, returns list[str]
     readings: list[WatchReading] = []
     for wuid in wuids:
         name = client.getWatchUserNames(wuid)  # sync
-        battery, is_charging, online = await asyncio.gather(
-            client.getWatchBattery(wuid),
-            client.getWatchIsCharging(wuid),
-            client.getWatchOnlineStatus(wuid),
-        )
+        loc = await client.loadWatchLocation(wuid, with_ask=False)
+        battery = (loc or {}).get("watch_battery")
         readings.append(
             WatchReading(
                 wuid=wuid,
                 name=str(name),
-                battery=int(battery),
-                is_charging=bool(is_charging),
-                online=str(online),
+                battery=int(battery) if battery is not None else -1,
+                is_charging=bool((loc or {}).get("watch_charging")),
+                online=await _online_passive(client, wuid),
             )
         )
     return readings
