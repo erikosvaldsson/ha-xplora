@@ -10,3 +10,7 @@ wheels/
 .venv
 
 .env
+
+# canary runtime artifacts (token cache holds an access token; log holds readings)
+.xplora_token.json
+canary.jsonl

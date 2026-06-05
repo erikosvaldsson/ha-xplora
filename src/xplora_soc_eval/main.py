@@ -71,7 +71,8 @@ def _load_credentials() -> dict[str, str]:
     return creds
 
 
-async def _build_client(creds: dict[str, str], session=None) -> PyXploraApi:
+def _new_client(creds: dict[str, str], session=None) -> PyXploraApi:
+    """Construct a V2-targeted client (not yet logged in)."""
     from . import v2
 
     v2.apply()  # o2o app key is dead; target the V2 app (see v2.py / FINDINGS.md)
@@ -89,6 +90,11 @@ async def _build_client(creds: dict[str, str], session=None) -> PyXploraApi:
     # (loginFailCount) and risks a lockout. See INVESTIGATION.md WS3.
     client.maxRetries = 0  # -> 2 attempts
     client.retryDelay = 1
+    return client
+
+
+async def _build_client(creds: dict[str, str], session=None) -> PyXploraApi:
+    client = _new_client(creds, session)
     await client.init(forceLogin=True)
     return client
 

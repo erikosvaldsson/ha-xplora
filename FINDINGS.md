@@ -176,7 +176,20 @@ phone). The non-login diagnostic ruled that out — see above.
 
 ## Next
 
-1. Decide whether to pursue option 1 (capture a working app key). If yes, that
-   becomes a new workstream ahead of any polling work.
-2. Only once authentication works do the passive read + WS3 token reuse +
-   Phase 3 canary become relevant.
+- [x] Auth unblocked via the V2 app key (RESOLVED above).
+- [x] **WS3 — token reuse.** `tokens.py` persists the login token (valid
+  ~35 days) 0600 to `.xplora_token.json` and restores it on restart, so polls
+  and restarts don't re-login. Verified: first run logs in + saves; restart
+  emits `token_restored` and polls with zero logins.
+- [x] **Phase 3 canary built.** `xplora-canary` logs in once (or restores),
+  then passively polls every ~90 min with ±15% jitter, classifies each cycle
+  (GraphQL error codes / bad HTTP / exceptions), re-logs-in once on token
+  expiry, and backs off exponentially (cap 6 h) on anything ban-like — never
+  hammering. One JSONL record per cycle → `canary.jsonl`. Smoke-tested over
+  fast cycles (healthy, 4 requests/cycle for 2 watches, no active locates).
+- [ ] **Run the canary for 1–2 weeks** at the default cadence and review
+  `canary.jsonl` for any non-`healthy` cycle (the ban test). Launch e.g.
+  `nohup uv run xplora-canary >/dev/null 2>&1 &` or a systemd unit.
+- [ ] If it stays clean: build the actual Home Assistant integration (the
+  archived `xplora_watch` is a reference for config flow / coordinator /
+  sensor entities; swap in the V2 host+key and the passive read).
