@@ -72,6 +72,9 @@ def _load_credentials() -> dict[str, str]:
 
 
 async def _build_client(creds: dict[str, str], session=None) -> PyXploraApi:
+    from . import v2
+
+    v2.apply()  # o2o app key is dead; target the V2 app (see v2.py / FINDINGS.md)
     client = PyXploraApi(
         countrycode=creds["countrycode"],
         phoneNumber=creds["phoneNumber"],

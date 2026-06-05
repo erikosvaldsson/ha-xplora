@@ -25,6 +25,9 @@ from .main import _load_credentials
 
 
 async def _run() -> None:
+    from . import v2
+
+    v2.apply()  # target the V2 app (the o2o app key is dead)
     c = _load_credentials()
 
     trace = aiohttp.TraceConfig()

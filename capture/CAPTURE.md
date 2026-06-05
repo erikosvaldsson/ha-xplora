@@ -23,13 +23,30 @@ After login the server even returns the app's own key in
 request header (bootstrap) or that response field gives us a usable key. The
 addon `mitm_extract.py` grabs both.
 
+## Which APK — important
+
+The library identifies as **`Xplorao2o`** and targets package
+**`com.xplora.xplorao2o`** (endpoint `api.myxplora.com`). That app was
+**unpublished from Google Play 2025-06-02**; the current Play app is a different
+package, **`com.xplora.xplorav2`**. The o2o sunset is a plausible cause of the
+`E000004` rejection, so:
+- Pull the **latest `com.xplora.xplorao2o`** build (in case its key rotated to a
+  still-valid one before sunset) — cheap to test, but it may be the same dead
+  key both libs already ship. Manage expectations.
+- If o2o is fully dead, the live key belongs to `com.xplora.xplorav2`, which
+  likely speaks a *different* API — a much larger porting effort than swapping a
+  key. Decompile v2 to see if it still uses `api.myxplora.com` + the
+  `H-BackDoor`/`Open` scheme before investing.
+
 ## Path A — static APK extraction (try first; no device proxying, no TLS)
 
 The bootstrap key is a static credential, so it may be embedded in the APK.
 
-1. Get the APK. Cleanest from your own device:
-   `adb shell pm path com.xplora.xplora` (package name may differ — list with
-   `adb shell pm list packages | grep -i xplora`), then `adb pull <path>`.
+1. Get the APK. Cleanest from your own device (if the o2o app is still
+   installed): `adb shell pm list packages | grep -i xplora`, then
+   `adb shell pm path com.xplora.xplorao2o` and `adb pull <path>`. Otherwise a
+   reputable mirror that verifies signatures (APKMirror); avoid random APK sites
+   (malware) and verify the signing cert.
 2. Decompile: `jadx -d out app.apk` (or `apktool d app.apk`).
 3. Grep for the key / scheme:
    ```
