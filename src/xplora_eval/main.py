@@ -14,8 +14,8 @@ Credentials are read from environment variables (a local .env is supported):
     XPLORA_LANG          e.g. "en-US"
     XPLORA_TIMEZONE      e.g. "Europe/Stockholm"
 
-Run:  uv run xplora-soc-eval
-      uv run xplora-soc-eval --watch 5   # repoll every 5s
+Run:  uv run xplora-eval
+      uv run xplora-eval --watch 5   # repoll every 5s
 """
 
 from __future__ import annotations

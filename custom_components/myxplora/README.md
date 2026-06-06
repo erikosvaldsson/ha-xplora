@@ -1,6 +1,6 @@
-<img src="icon.png" alt="Xplora SoC" width="96" align="left" />
+<img src="icon.png" alt="Xplora Watch" width="96" align="left" />
 
-# Xplora SoC — Home Assistant integration
+# Xplora Watch — Home Assistant integration
 
 A custom integration that supervises Xplora® watches via **passive** polling of
 the cloud API. It reads each watch's last self-reported `WatchLastLocate`
@@ -36,10 +36,10 @@ The device page also shows manufacturer, model, and firmware version.
 **HACS (custom repository):** add `https://gitlab.com/erik.osvaldsson/ha-xplora`
 as an Integration repository, install, restart HA.
 
-**Manual:** copy `custom_components/xplora_soc/` into your HA `config/custom_components/`
+**Manual:** copy `custom_components/myxplora/` into your HA `config/custom_components/`
 and restart.
 
-Then **Settings → Devices & Services → Add Integration → Xplora SoC**, and sign
+Then **Settings → Devices & Services → Add Integration → Xplora Watch**, and sign
 in with the same account you use in the Xplora app (email *or* phone + country
 code). Scan interval defaults to 90 min and is adjustable in the integration's
 options (floor 30 min — keep it slow on purpose).

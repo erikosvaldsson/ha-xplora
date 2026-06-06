@@ -1,4 +1,4 @@
-"""The Xplora SoC integration — passive battery/telemetry for Xplora watches."""
+"""The Xplora Watch integration — passive battery/telemetry for Xplora watches."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ type XploraConfigEntry = ConfigEntry[XploraCoordinator]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: XploraConfigEntry) -> bool:
-    """Set up Xplora SoC from a config entry."""
+    """Set up Xplora Watch from a config entry."""
     coordinator = XploraCoordinator(hass, entry)
     await coordinator.async_config_entry_first_refresh()
 

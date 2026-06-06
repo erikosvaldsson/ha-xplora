@@ -1,10 +1,10 @@
-"""Constants for the Xplora SoC integration."""
+"""Constants for the Xplora Watch integration."""
 
 from __future__ import annotations
 
 from datetime import timedelta
 
-DOMAIN = "xplora_soc"
+DOMAIN = "myxplora"
 MANUFACTURER = "Xplora"
 
 # Config entry keys (CONF_EMAIL / CONF_PASSWORD come from homeassistant.const)

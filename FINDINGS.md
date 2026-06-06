@@ -40,7 +40,7 @@ The decisive finding: **battery can be read passively.**
 
 ## Phase 1 — instrumentation (one live login's worth of traffic)
 
-`src/xplora_soc_eval/probe.py` wraps every GraphQL operation (name, HTTP status,
+`src/xplora_eval/probe.py` wraps every GraphQL operation (name, HTTP status,
 latency, errors) and adds an aiohttp trace hook for raw HTTP status.
 
 Observed signatures so far:
@@ -107,7 +107,7 @@ Verified against the user's real account:
 - Footprint per poll confirmed: **1 login + 1 `WatchLastLocate` per watch, 0
   active locates** (3 GraphQL ops for 2 watches).
 
-Wired into the code as `xplora_soc_eval/v2.py` (`apply()` patches the library's
+Wired into the code as `xplora_eval/v2.py` (`apply()` patches the library's
 host+key); `xplora-probe` / `xplora-diag` now target V2 automatically. The o2o
 check confirmed o2o ships the same dead key, so V2 is the only live path.
 

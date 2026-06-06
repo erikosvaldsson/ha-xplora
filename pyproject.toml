@@ -1,7 +1,7 @@
 [project]
-name = "xplora-soc-eval"
+name = "xplora-eval"
 version = "0.1.0"
-description = "Evaluate pyxplora-api for battery SoC supervision across Xplora watches"
+description = "Evaluate pyxplora-api for passive battery/telemetry supervision across Xplora watches"
 readme = "README.md"
 authors = [
     { name = "Erik Osvaldsson", email = "erik@osvaldsson.se" }
@@ -13,10 +13,10 @@ dependencies = [
 ]
 
 [project.scripts]
-xplora-soc-eval = "xplora_soc_eval:main"
-xplora-probe = "xplora_soc_eval.probe:main"
-xplora-diag = "xplora_soc_eval.diag:main"
-xplora-canary = "xplora_soc_eval.canary:main"
+xplora-eval = "xplora_eval:main"
+xplora-probe = "xplora_eval.probe:main"
+xplora-diag = "xplora_eval.diag:main"
+xplora-canary = "xplora_eval.canary:main"
 
 [build-system]
 requires = ["uv_build>=0.11.16,<0.12.0"]

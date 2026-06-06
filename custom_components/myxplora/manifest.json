@@ -1,6 +1,6 @@
 {
-  "domain": "xplora_soc",
-  "name": "Xplora SoC",
+  "domain": "myxplora",
+  "name": "Xplora Watch",
   "codeowners": ["@erik.osvaldsson"],
   "config_flow": true,
   "documentation": "https://gitlab.com/erik.osvaldsson/ha-xplora",

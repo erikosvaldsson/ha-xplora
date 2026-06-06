@@ -1,4 +1,4 @@
-# xplora-soc-eval
+# xplora-eval
 
 A small [uv](https://docs.astral.sh/uv/) project that evaluates
 [`pyxplora-api`](https://pypi.org/project/pyxplora-api/) as a foundation for a
@@ -10,8 +10,8 @@ across multiple Xplora® watches.
 ```bash
 uv sync
 cp .env.example .env      # then fill in your Xplora credentials
-uv run xplora-soc-eval            # poll once
-uv run xplora-soc-eval --watch 3600   # repoll every hour (see ban note below)
+uv run xplora-eval            # poll once
+uv run xplora-eval --watch 3600   # repoll every hour (see ban note below)
 ```
 
 Example output:
@@ -108,7 +108,7 @@ fork from, license permitting).
 ## Layout
 
 ```
-src/xplora_soc_eval/
+src/xplora_eval/
   __init__.py   # exports main
   main.py       # login + per-watch SoC report
 .env.example    # credential template (.env is gitignored)
