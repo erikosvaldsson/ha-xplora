@@ -31,9 +31,15 @@ class XploraWatchEntity(CoordinatorEntity[XploraCoordinator]):
     @property
     def device_info(self) -> DeviceInfo:
         watch = self.watch
+        base = watch.name if watch else self._wuid
+        model = watch.model if watch else None
+        # Put the model in the device name so it flows into entity_ids, e.g.
+        # "Alex Watch XGO3" -> binary_sensor.alex_watch_xgo3_charging.
+        name = f"{base} Watch {model}" if model else base
         return DeviceInfo(
             identifiers={(DOMAIN, self._wuid)},
-            manufacturer=MANUFACTURER,
-            name=watch.name if watch else self._wuid,
-            model="Xplora Watch",
+            manufacturer=(watch.manufacturer if watch else None) or MANUFACTURER,
+            name=name,
+            model=model or "Xplora Watch",
+            sw_version=watch.sw_version if watch else None,
         )

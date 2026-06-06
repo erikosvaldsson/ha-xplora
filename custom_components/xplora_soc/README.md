@@ -27,6 +27,10 @@ integration. See [`../../FINDINGS.md`](../../FINDINGS.md) for the full story.
 The location is **last-known**, not a live fix (a live fix would need an active
 locate, which we deliberately avoid). It can be 15–35 min stale.
 
+Each watch is one HA device named `<watch> Watch <model>` (e.g. `Alex Watch
+XGO3`), so entity ids include the model — e.g. `binary_sensor.alex_watch_xgo3_charging`.
+The device page also shows manufacturer, model, and firmware version.
+
 ## Install
 
 **HACS (custom repository):** add `https://gitlab.com/erik.osvaldsson/ha-xplora`

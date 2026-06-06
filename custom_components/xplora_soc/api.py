@@ -30,6 +30,9 @@ class WatchData:
     wuid: str
     name: str
     online: str | None = None
+    model: str | None = None
+    manufacturer: str | None = None
+    sw_version: str | None = None
     battery: int | None = None
     charging: bool = False
     step: int | None = None
@@ -123,9 +126,9 @@ class XploraApi:
 
     async def _read_watch(self, wuid: str) -> WatchData:
         name = str(self._client.getWatchUserNames(wuid))
+        info = await self._watch_info(wuid)  # passive `watches` record
         loc = await self._client.loadWatchLocation(wuid, with_ask=False)  # passive
         raw = (loc or {}).get("watch_last_location", {}) or {}
-        online = await self._online_status(wuid)
 
         lat = _as_float(raw.get("lat"))
         lng = _as_float(raw.get("lng"))
@@ -137,7 +140,10 @@ class XploraApi:
         return WatchData(
             wuid=wuid,
             name=name,
-            online=online,
+            online=str(info.get("onlineStatus")) if info.get("onlineStatus") else None,
+            model=info.get("groupName") or None,
+            manufacturer=(info.get("brand") or "").title() or None,
+            sw_version=info.get("osVersion") or None,
             battery=int(battery) if battery is not None else None,
             charging=bool(raw.get("isCharging")),
             step=raw.get("step"),
@@ -154,13 +160,16 @@ class XploraApi:
             battery_reported_at=_as_dt(raw.get("batteryTm")),
         )
 
-    async def _online_status(self, wuid: str) -> str | None:
-        """Online status from the passive `watches` query — no locate command."""
+    async def _watch_info(self, wuid: str) -> dict:
+        """The passive `watches` record (online status, model, brand, firmware).
+
+        No locate command — same query we already need for online status.
+        """
         try:
             data = await self._client._gql_handler.getWatches_a(wuid)
             watches = data.get("watches", [])
             if watches:
-                return str(watches[0].get("onlineStatus", "UNKNOWN"))
+                return watches[0]
         except Exception:  # noqa: BLE001 - best-effort, never fail the whole poll
-            _LOGGER.debug("online status read failed for %s", wuid, exc_info=True)
-        return None
+            _LOGGER.debug("watch info read failed for %s", wuid, exc_info=True)
+        return {}

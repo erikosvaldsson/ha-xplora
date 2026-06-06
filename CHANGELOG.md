@@ -6,6 +6,18 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-06-05
+
+### Added
+- Device now reports **model** (`groupName`, e.g. `XGO3`), **manufacturer**
+  (`brand`), and **firmware** (`osVersion`) — shown on the HA device page. All
+  read from the same passive `watches` query (no extra requests).
+
+### Changed
+- The watch **model is included in the device name** (e.g. `Alex Watch XGO3`),
+  so it flows into entity ids — e.g. `binary_sensor.alex_watch_xgo3_charging`.
+  This changes entity ids versus 0.1.0 (no installs yet, so no migration needed).
+
 ## [0.1.0] - 2026-06-05
 
 Initial release.
@@ -35,5 +47,6 @@ Initial release.
   re-extract per [`capture/CAPTURE.md`](capture/CAPTURE.md) and update
   `custom_components/xplora_soc/_v2.py`.
 
-[Unreleased]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.1.0...main
+[Unreleased]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.1.1...main
+[0.1.1]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.1.0...v0.1.1
 [0.1.0]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/tags/v0.1.0
