@@ -6,6 +6,22 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-06
+
+### Changed
+- **Renamed integration: domain `xplora_soc` → `myxplora`, name "Xplora SoC" →
+  "Xplora Watch".** The integration outgrew its battery-only "SoC" name — it now
+  exposes location, activity, device info, and connectivity. The distinct domain
+  also avoids a collision with the community `xplora_watch` integration, so both
+  can be installed side by side.
+- Renamed the internal research harness package `xplora_soc_eval` → `xplora_eval`
+  (CLI `xplora-soc-eval` → `xplora-eval`).
+
+### Breaking
+- The domain change is **not auto-migrated**: an existing `xplora_soc` config
+  entry will fail to load after upgrading. Delete the old entry and re-add the
+  integration as **Xplora Watch** (re-entering your credentials).
+
 ## [0.1.1] - 2026-06-05
 
 ### Added
@@ -47,6 +63,7 @@ Initial release.
   re-extract per [`capture/CAPTURE.md`](capture/CAPTURE.md) and update
   `custom_components/myxplora/_v2.py`.
 
-[Unreleased]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.1.1...main
+[Unreleased]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.2.0...main
+[0.2.0]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.1.1...v0.2.0
 [0.1.1]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.1.0...v0.1.1
 [0.1.0]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/tags/v0.1.0
