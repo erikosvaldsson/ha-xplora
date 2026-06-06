@@ -1,0 +1,53 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Xplora account",
+        "description": "Sign in with the same account you use in the Xplora app. Use either email or phone number.",
+        "data": {
+          "country_code": "Country code (e.g. +46)",
+          "email": "Email",
+          "phone_number": "Phone number (without country code)",
+          "password": "Password",
+          "language": "Language",
+          "timezone": "Time zone"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Authentication failed. Check your credentials (the app key may also have been rotated).",
+      "cannot_connect": "Could not reach the Xplora service.",
+      "need_email_or_phone": "Provide either an email or a phone number."
+    },
+    "abort": {
+      "already_configured": "This account is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Polling",
+        "description": "How often to poll (minutes). Kept deliberately slow to avoid Xplora's rate-limiting/IP ban; battery does not need fast polling.",
+        "data": {
+          "scan_minutes": "Scan interval (minutes)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "steps": { "name": "Steps" },
+      "distance": { "name": "Distance" },
+      "locate_type": { "name": "Locate type" },
+      "safe_zone": { "name": "Safe zone" },
+      "located_at": { "name": "Location reported" },
+      "battery_reported_at": { "name": "Battery reported" }
+    },
+    "binary_sensor": {
+      "in_safe_zone": { "name": "In safe zone" }
+    },
+    "device_tracker": {
+      "location": { "name": "Location" }
+    }
+  }
+}
