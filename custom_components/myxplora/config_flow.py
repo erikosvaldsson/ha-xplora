@@ -1,4 +1,4 @@
-"""Config + options flow for Xplora Watch."""
+"""Config + options flow for myXplora."""
 
 from __future__ import annotations
 

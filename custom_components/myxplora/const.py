@@ -1,4 +1,4 @@
-"""Constants for the Xplora Watch integration."""
+"""Constants for the myXplora integration."""
 
 from __future__ import annotations
 

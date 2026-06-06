@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the **Xplora Watch** Home Assistant integration are
+All notable changes to the **myXplora** Home Assistant integration are
 documented here. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -10,9 +10,9 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ### Changed
 - **Renamed integration: domain `xplora_soc` → `myxplora`, name "Xplora SoC" →
-  "Xplora Watch".** The integration outgrew its battery-only "SoC" name — it now
-  exposes location, activity, device info, and connectivity. The distinct domain
-  also avoids a collision with the community `xplora_watch` integration, so both
+  "myXplora".** The integration outgrew its battery-only "SoC" name — it now
+  exposes location, activity, device info, and connectivity. The new domain and
+  name avoid a collision with the community `xplora_watch` integration, so both
   can be installed side by side.
 - Renamed the internal research harness package `xplora_soc_eval` → `xplora_eval`
   (CLI `xplora-soc-eval` → `xplora-eval`).
@@ -20,7 +20,7 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ### Breaking
 - The domain change is **not auto-migrated**: an existing `xplora_soc` config
   entry will fail to load after upgrading. Delete the old entry and re-add the
-  integration as **Xplora Watch** (re-entering your credentials).
+  integration as **myXplora** (re-entering your credentials).
 
 ## [0.1.1] - 2026-06-05
 
