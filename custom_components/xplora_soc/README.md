@@ -1,3 +1,5 @@
+<img src="icon.png" alt="Xplora SoC" width="96" align="left" />
+
 # Xplora SoC — Home Assistant integration
 
 A custom integration that supervises Xplora® watches via **passive** polling of
