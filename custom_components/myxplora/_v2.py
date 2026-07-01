@@ -5,8 +5,9 @@ The current `com.xplora.xplorav2` app speaks the same GraphQL API on a different
 host with a different key/secret, which still work. This patches the library's
 module-level constants in-process before any client is built.
 
-Provenance + how to re-extract if Xplora rotates it: see the repo's
-`capture/CAPTURE.md` and `FINDINGS.md`.
+If Xplora rotates the key, it can be re-extracted from the current
+`com.xplora.xplorav2` Android app (the 32-hex `API_KEY`/`API_SECRET` used in the
+`H-BackDoor-Authorization` header) and updated below.
 """
 
 from __future__ import annotations

@@ -2,7 +2,7 @@
 
 Only passive calls are used: the watch's last self-reported snapshot
 (`loadWatchLocation(with_ask=False)`) plus the passive `watches` online field.
-No `askWatchLocate`/tracking commands are ever sent. See FINDINGS.md.
+No `askWatchLocate`/tracking commands are ever sent (see the repository README).
 """
 
 from __future__ import annotations

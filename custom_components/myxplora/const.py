@@ -16,8 +16,8 @@ CONF_LANGUAGE = "language"
 DEFAULT_LANGUAGE = "en-US"
 DEFAULT_TIMEZONE = "Europe/Stockholm"
 
-# Slow, passive polling — see FINDINGS.md. Default 90 min; floor kept high so
-# nobody accidentally reproduces the active-polling ban.
+# Slow, passive polling. Default 90 min; floor kept high so nobody
+# accidentally reproduces the active-polling ban.
 CONF_SCAN_MINUTES = "scan_minutes"
 DEFAULT_SCAN_MINUTES = 90
 MIN_SCAN_MINUTES = 30

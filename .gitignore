@@ -14,3 +14,8 @@ wheels/
 # canary runtime artifacts (token cache holds an access token; log holds readings)
 .xplora_token.json
 canary.jsonl
+
+# local-only research notes (kept out of the public repo)
+FINDINGS.md
+INVESTIGATION.md
+capture/

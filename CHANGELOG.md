@@ -60,8 +60,7 @@ Initial release.
 ### Notes
 - Unofficial, reverse-engineered client for personal use with your own account.
 - If logins start failing (`invalid_auth`), the V2 app key was likely rotated —
-  re-extract per [`capture/CAPTURE.md`](capture/CAPTURE.md) and update
-  `custom_components/myxplora/_v2.py`.
+  re-extract it and update `custom_components/myxplora/_v2.py`.
 
 [Unreleased]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.2.0...main
 [0.2.0]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.1.1...v0.2.0

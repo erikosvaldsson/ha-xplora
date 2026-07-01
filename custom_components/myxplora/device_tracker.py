@@ -23,7 +23,7 @@ async def async_setup_entry(
 
 
 class XploraDeviceTracker(XploraWatchEntity, TrackerEntity):
-    """Last-known location. Not a live fix — see FINDINGS.md (no active locate)."""
+    """Last-known location. Not a live fix (no active locate command is sent)."""
 
     _attr_translation_key = "location"
 

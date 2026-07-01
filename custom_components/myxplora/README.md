@@ -6,7 +6,8 @@ A custom integration that supervises Xplora® watches via **passive** polling of
 the cloud API. It reads each watch's last self-reported `WatchLastLocate`
 snapshot — it never sends an active locate/track command — so it stays well
 clear of the rate-limiting/IP-ban that retired the original `xplora_watch`
-integration. See [`../../FINDINGS.md`](../../FINDINGS.md) for the full story.
+integration. See the [repository README](https://gitlab.com/erik.osvaldsson/ha-xplora)
+for installation, configuration, and the full rationale.
 
 ## Entities (per watch)
 
@@ -33,11 +34,11 @@ The device page also shows manufacturer, model, and firmware version.
 
 ## Install
 
-**HACS (custom repository):** add `https://gitlab.com/erik.osvaldsson/ha-xplora`
-as an Integration repository, install, restart HA.
-
-**Manual:** copy `custom_components/myxplora/` into your HA `config/custom_components/`
-and restart.
+Install via [GPM](https://github.com/tomasbedrich/gpm) (recommended), HACS
+(custom repository `https://github.com/erikosvaldsson/ha-xplora`), or copy
+`custom_components/myxplora/` into your HA `config/custom_components/` and
+restart. See the [repository README](https://gitlab.com/erik.osvaldsson/ha-xplora)
+for full steps.
 
 Then **Settings → Devices & Services → Add Integration → myXplora**, and sign
 in with the same account you use in the Xplora app (email *or* phone + country
@@ -48,6 +49,5 @@ options (floor 30 min — keep it slow on purpose).
 
 - Auth uses the current Xplora **V2** app key/host (the library's bundled key is
   dead). If logins start failing with `invalid_auth`, the key was likely
-  rotated — re-extract per [`../../capture/CAPTURE.md`](../../capture/CAPTURE.md)
-  and update `_v2.py`.
+  rotated and will need to be re-extracted and updated in `_v2.py`.
 - Unofficial, reverse-engineered client for personal use with your own account.

@@ -1,7 +1,7 @@
 {
   "domain": "myxplora",
   "name": "myXplora",
-  "codeowners": ["@erik.osvaldsson"],
+  "codeowners": ["@erikosvaldsson"],
   "config_flow": true,
   "documentation": "https://gitlab.com/erik.osvaldsson/ha-xplora",
   "integration_type": "hub",
