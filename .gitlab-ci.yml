@@ -13,11 +13,13 @@ variables:
 secret_detection:
   stage: secret-detection
 
-# Floating image on purpose: tests track the current Home Assistant release,
-# which needs a recent Python.
+# Tests track the current Home Assistant release (requirements are unpinned),
+# but the Python minor is pinned: python:3 moves to a new minor before HA's
+# dependencies publish wheels for it, and pydantic-core then has to be built
+# from Rust source. Bump this when Home Assistant moves to the next Python.
 pytest:
   stage: test
-  image: python:3
+  image: python:3.14
   # uv resolves and installs Home Assistant's dependencies in a fraction of
   # pip's time; its cache keeps downloaded wheels between pipelines.
   variables:
