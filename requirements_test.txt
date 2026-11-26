@@ -1,0 +1,4 @@
+# Unpinned on purpose: CI tests against the current Home Assistant release.
+pytest-homeassistant-custom-component
+# The integration's own requirement (manifest.json), so its modules import.
+pyxplora-api==2.12.9

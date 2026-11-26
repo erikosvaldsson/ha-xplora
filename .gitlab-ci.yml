@@ -1,0 +1,30 @@
+# SAST customization: https://docs.gitlab.com/user/application_security/sast/#available-cicd-variables
+# Secret Detection customization: https://docs.gitlab.com/user/application_security/secret_detection/pipeline/configure/
+stages:
+- test
+- secret-detection
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
+- template: Security/Secret-Detection.gitlab-ci.yml
+variables:
+  SECRET_DETECTION_ENABLED: 'true'
+secret_detection:
+  stage: secret-detection
+
+# Floating image on purpose: tests track the current Home Assistant release,
+# which needs a recent Python.
+pytest:
+  stage: test
+  image: python:3
+  script:
+    - pip install --quiet -r requirements_test.txt
+    - pytest
+
+ruff:
+  stage: test
+  image: python:3
+  script:
+    - pip install --quiet ruff
+    - ruff check .
