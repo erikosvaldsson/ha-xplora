@@ -6,6 +6,11 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- The integration icon now shows in Home Assistant. HA (2026.4+) serves a custom
+  integration's icon from `custom_components/<domain>/brand/`; the images sat in
+  the integration root, which nothing reads, so HA showed a placeholder.
+
 ## [0.2.0] - 2026-06-06
 
 ### Changed
