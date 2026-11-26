@@ -18,9 +18,22 @@ secret_detection:
 pytest:
   stage: test
   image: python:3
+  # uv resolves and installs Home Assistant's dependencies in a fraction of
+  # pip's time; its cache keeps downloaded wheels between pipelines.
+  variables:
+    UV_CACHE_DIR: .uv-cache
+  cache:
+    key:
+      files:
+        - requirements_test.txt
+    paths:
+      - .uv-cache/
   script:
-    - pip install --quiet -r requirements_test.txt
+    - pip install --quiet uv
+    - uv pip install --system --quiet -r requirements_test.txt
     - pytest
+  after_script:
+    - uv cache prune --ci
 
 ruff:
   stage: test
