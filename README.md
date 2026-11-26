@@ -1,4 +1,4 @@
-<img src="custom_components/myxplora/icon.png" alt="myXplora" width="88" align="left" />
+<img src="custom_components/myxplora/brand/icon.png" alt="myXplora" width="88" align="left" />
 
 # myXplora — Home Assistant integration
 
