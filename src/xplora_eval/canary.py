@@ -15,11 +15,11 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+from datetime import UTC, datetime
 import json
+from pathlib import Path
 import random
 import time
-from datetime import datetime, timezone
-from pathlib import Path
 
 import aiohttp
 from pyxplora_api import graphql_client as _gc
@@ -94,7 +94,7 @@ class RequestMonitor:
 
 
 def _log(record: dict) -> None:
-    record = {"ts": datetime.now(timezone.utc).isoformat(), **record}
+    record = {"ts": datetime.now(UTC).isoformat(), **record}
     with LOG.open("a") as f:
         f.write(json.dumps(record) + "\n")
     print(json.dumps(record))

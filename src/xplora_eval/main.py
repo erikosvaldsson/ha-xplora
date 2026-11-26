@@ -22,9 +22,9 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+from dataclasses import dataclass
 import os
 import time
-from dataclasses import dataclass
 
 from dotenv import load_dotenv
 from pyxplora_api.pyxplora_api_async import PyXploraApi

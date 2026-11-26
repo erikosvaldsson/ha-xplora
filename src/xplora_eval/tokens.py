@@ -14,8 +14,8 @@ access token (a credential) so the file is written 0600 and must stay gitignored
 from __future__ import annotations
 
 import json
-import time
 from pathlib import Path
+import time
 
 from pyxplora_api.pyxplora_api_async import PyXploraApi
 
