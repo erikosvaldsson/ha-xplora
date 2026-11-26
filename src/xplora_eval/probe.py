@@ -18,8 +18,8 @@ loop. Run:  uv run xplora-probe
 from __future__ import annotations
 
 import asyncio
-import time
 from dataclasses import dataclass, field
+import time
 
 import aiohttp
 from pyxplora_api import graphql_client as _gc

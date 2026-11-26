@@ -19,3 +19,6 @@ canary.jsonl
 FINDINGS.md
 INVESTIGATION.md
 capture/
+
+# CI package cache
+.uv-cache/

@@ -1,0 +1,45 @@
+# SAST customization: https://docs.gitlab.com/user/application_security/sast/#available-cicd-variables
+# Secret Detection customization: https://docs.gitlab.com/user/application_security/secret_detection/pipeline/configure/
+stages:
+- test
+- secret-detection
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
+- template: Security/Secret-Detection.gitlab-ci.yml
+variables:
+  SECRET_DETECTION_ENABLED: 'true'
+secret_detection:
+  stage: secret-detection
+
+# Tests track the current Home Assistant release (requirements are unpinned),
+# but the Python minor is pinned: python:3 moves to a new minor before HA's
+# dependencies publish wheels for it, and pydantic-core then has to be built
+# from Rust source. Bump this when Home Assistant moves to the next Python.
+pytest:
+  stage: test
+  image: python:3.14
+  # uv resolves and installs Home Assistant's dependencies in a fraction of
+  # pip's time; its cache keeps downloaded wheels between pipelines.
+  variables:
+    UV_CACHE_DIR: .uv-cache
+  cache:
+    key:
+      files:
+        - requirements_test.txt
+    paths:
+      - .uv-cache/
+  script:
+    - pip install --quiet uv
+    - uv pip install --system --quiet -r requirements_test.txt
+    - pytest
+  after_script:
+    - uv cache prune --ci
+
+ruff:
+  stage: test
+  image: python:3
+  script:
+    - pip install --quiet ruff
+    - ruff check .
