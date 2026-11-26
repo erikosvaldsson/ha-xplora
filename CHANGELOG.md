@@ -6,6 +6,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-26
+
 ### Fixed
 - The integration icon now shows in Home Assistant. HA (2026.4+) serves a custom
   integration's icon from `custom_components/<domain>/brand/`; the images sat in
@@ -67,7 +69,8 @@ Initial release.
 - If logins start failing (`invalid_auth`), the V2 app key was likely rotated —
   re-extract it and update `custom_components/myxplora/_v2.py`.
 
-[Unreleased]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.2.0...main
+[Unreleased]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.2.1...main
+[0.2.1]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.2.0...v0.2.1
 [0.2.0]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.1.1...v0.2.0
 [0.1.1]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/compare/v0.1.0...v0.1.1
 [0.1.0]: https://gitlab.com/erik.osvaldsson/ha-xplora/-/tags/v0.1.0
